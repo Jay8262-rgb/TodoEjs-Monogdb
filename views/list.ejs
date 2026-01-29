@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo db</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- <link rel="stylesheet" href="/css/newstyle.css"> -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("mainBox");
+        const inputBox = document.getElementById("inputbox");
+        const Delbutton = document.getElementById("Del")
+
+        if (form) {
+        form.addEventListener("submit", function (e) {
+        if (inputBox.value === "") {
+        alert("Please Enter the value");
+        e.preventDefault(); // Stop form submission
+        }
+      });
+    }
+  });
+
+  function showMessage(){
+    alert(" you delete the message!!")
+  }
+
+  function showUpdateMessage(){
+    alert("your Todo list are updated!!")
+  }
+
+    </script> 
+</head>
+<body>
+    <div class="box">
+        <h1>Todo list</h1>
+       
+    </div>    
+    <div class="box">
+        <% for(var i = 0; i < ejs.length; i++ ){ %>
+            <div class="item" >
+                <input type="checkbox">
+                    <p> <span class="style" style= "color: <%= ejs[i].color %>;
+
+                     font-weight: <%= ejs[i].font === 'bold' ? 'bold' : 'normal'  %>;
+                      font-style: <%= ejs[i].font  === 'italic' ? 'italic' : 'normal' %> ;
+                      text-decoration: <%= ejs[i].font === 'underline' ? 'underline' : 'normal' %> ; 
+                      text-transform:<%= ejs[i].font === 'uppercase' ? 'uppercase' 
+                                    : ejs[i].font === 'lowercase' ? 'lowercase' 
+                                    : ejs[i].font === 'capitalize' ? 'capitalize' : 'none' %>;
+                                     
+; 
+                      
+                       background-color: <%= ejs[i].highlight %> ">
+
+                      <%= ejs[i].name %></span>   <span class="priority"><%= ejs[i].priority %></span> </p>
+              <form action="/edit/<%=ejs[i]._id %>" method="GET" id="edit">
+                <button class="edit" name="edit"><ion-icon name="create-outline">ion-icon></button>
+              </form>
+              <form action="/delete/<%= ejs[i]._id %>" method="POST">
+                <button class="Del" onclick="showMessage()" id="Del"><ion-icon name="trash-outline"></ion-icon></button>
+              </form>
+            </div>  
+        <% } %>
+
+        <% if (showUpdate) { %>
+        <form action="/update/<%= editId %>" method="POST" id="update">
+          <div class="style-priority-container">
+          <p class="pri">Color:<select name="color" class="priority-select"> 
+            <option class="prio" value="" name= "None" > None </option> 
+            <option class="prio" value="Red" name="Red" > Red </option>
+            <option class="prio" value="blue" name="blue" > blue </option>
+            <option class="prio" value="Green" name="Green" > Green </option>
+            <option class="prio" value="yellow" name= "yellow" > yellow </option> 
+        </select></p>
+        <p class="pri">Font:<select name="font" class="priority-select"> 
+            <option class="prio" value="" name= "normal" > normal </option> 
+            <option class="prio" value="bold" name="bold" > bold </option>
+            <option class="prio" value="italic" name="italic" > italic </option>
+            <option class="prio" value="lowercase" name="lowercase" > lowercase </option>
+            <option class="prio" value="uppercase" name="uppercase" > uppercase </option>
+            <option class="prio" value="underline" name="underline" > underline </option>
+            <option class="prio" value="capitalize" name="capitalize" > capitalize </option>
+        </select></p>
+        <p class="pri">Highlight-Color:<select name="highlight" class="priority-select"> 
+          <option class="prio"   value="" name= "None" > None </option> 
+            <option class="prio" value="red" name="red" > red </option>
+            <option class="prio" value="blue" name="blue" > blue </option>
+            <option class="prio" value="Green" name="Green" > green </option>
+            <option class="prio" value="Yellow" name= "Yellow" > yellow  </option> 
+        </select></p>
+        </div>
+        <div class="input-field">
+        <input type="text" name="ejs1"  class="input-priority" value="<%= editValue.item %>">
+        <p class="input-priority">priority:<select name="priority" class="priority-select"> 
+            <option name= "NA" value=" ">Precedence: NA</option> 
+            <option name="Low" value="Low">Low</option>
+            <option name="Medium" value="Medium">Medium</option>
+            <option name="High" value="High">High</option>
+        </select></p>
+        </div>
+        
+        <div class="send-portion">
+        <button type="submit" onclick="showUpdateMessage()" id="updateButton">Update</button>
+        <button type="button" name="cancelButton" id="cancelButton" onclick="window.location.href='/'" >Cancel</button>
+        </div>
+        
+        </form>
+        <% } else { %>
+        
+        <form action="/" method="POST" id="mainBox">
+        <input type="text" id="inputbox"  name="ejs1" placeholder="Enter the task">
+        <select name="priority" class="priority-select">
+            <option name= "NA" value=" ">Precedence: NA</option> 
+            <option name="Low" value="Low">Low</option>
+            <option name="Medium" value="Medium">Medium</option>
+            <option name="High" value="High">High</option>
+        </select>
+        <button id="plus" type="submit">+</button> 
+     </form>
+     <% } %>
+
+        
+    </div>
+    <footer style="background:#333; color:white; text-align:center; padding:10px; margin-top:20px;">
+    <p>&copy;  Todo List App | All Rights Reserved</p>
+</footer>
+</body>
+</html>
