@@ -1,4 +1,5 @@
 const express = require('express');
+const http = require('http').Server(app);
 const bodyParser = require('body-parser');
 var app = express();
 
@@ -8,9 +9,9 @@ app.use(express.static('public'));
 
 const mongoose = require("mongoose");
 // const { name } = require('ejs');
-mongoose.connect("mongodb://localhost:27017/todo")
+mongoose.connect("mongodb+srv://jk825405jay_db_user:Qp_vqU5QDGisaCR@cluster0.qduspak.mongodb.net/?appName=Cluster0")
 .then(() => {
-  console.log("MongoDB connected");
+  console.log("MongoDB atlas connected");
 
   app.listen(3000, () => {
     console.log("Server started on port 3000");
