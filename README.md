@@ -100,17 +100,6 @@
 
 <hr />
 
-<h2>🗃 Database Structure</h2>
-<p>MongoDB collection name: <b>tasks</b></p>
-<pre>
-{
-  "title": "Complete MERN Assignment",
-  "priority": "Urgent"
-}
-</pre>
-
-<hr />
-
 <h2>📂 Project Structure</h2>
 <pre>
 project-folder/
