@@ -1,7 +1,7 @@
 
 <body>
 
-<h1 align="center">📝 MERN Assignment 8</h1>
+<h1 align="center">📝 MERN Project</h1>
 <h3 align="center">To-Do List Web Application</h3>
 <p align="center"><b> devloped by :</b> Jay keshhri</p>
 
